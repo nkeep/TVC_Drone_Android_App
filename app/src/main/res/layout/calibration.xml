@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/upY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:text="Up"
+        app:layout_constraintEnd_toStartOf="@+id/rightX"
+        app:layout_constraintStart_toEndOf="@+id/servoX"
+        app:layout_constraintTop_toBottomOf="@+id/leftX" />
+
+    <TextView
+        android:id="@+id/servoY"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="58dp"
+        android:gravity="center"
+        android:text="Servo Y"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/leftX"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/servoX" />
+
+    <Button
+        android:id="@+id/downY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:text="Down"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/leftX"
+        app:layout_constraintTop_toBottomOf="@+id/rightX" />
+
+    <Button
+        android:id="@+id/rightX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/leftX"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/servoX"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginTop="56dp"
+        android:gravity="center"
+        android:text="Servo X"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/leftX"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/leftX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Left"
+        app:layout_constraintEnd_toStartOf="@+id/rightX"
+        app:layout_constraintStart_toEndOf="@+id/servoX"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="356dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="84dp"
+        android:text="Make sure accelerometer is level"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upY" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="167dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="114dp"
+        android:text="Save"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="347dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="26dp"
+        android:gravity="center"
+        android:text="Calibrate Sensors"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
