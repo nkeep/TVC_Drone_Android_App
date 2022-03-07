@@ -1,7 +1,5 @@
 package com.example.tvc_drone_java;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -11,28 +9,16 @@ import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tvc_drone_java.ActivityHelper;
-import com.example.tvc_drone_java.MainActivity;
-import com.example.tvc_drone_java.R;
-
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Set;
 import java.util.UUID;
-import java.util.*;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 
@@ -55,7 +41,7 @@ public class Controlling extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     Button btnRaise,btnLower, btnTakeOff;
-    TextView accelVals, joystickVals;
+    TextView xAccel, yAccel, xServo, yServo, motors, joystickVals;
 
 
     @Override
@@ -67,7 +53,11 @@ public class Controlling extends AppCompatActivity {
         btnRaise=(Button)findViewById(R.id.raise);
         btnLower=(Button)findViewById(R.id.lower);
         btnTakeOff=(Button)findViewById(R.id.takeOff);
-        accelVals=(TextView)findViewById(R.id.accelValues);
+        xAccel=(TextView)findViewById(R.id.xAccel);
+        yAccel=(TextView)findViewById(R.id.yAccel);
+        xServo=(TextView)findViewById(R.id.xServo);
+        yServo=(TextView)findViewById(R.id.yServo);
+        motors=(TextView)findViewById(R.id.motors);
         joystickVals=(TextView)findViewById(R.id.joystickVals);
 
 
@@ -197,15 +187,23 @@ public class Controlling extends AppCompatActivity {
                         for (i = 0; i < buffer.length && buffer[i] != 0; i++) {
                         }
                         final String strInput = new String(buffer, 0, i);
+                        String [] lines = strInput.split("(?<=\n)"); //splitting by new lines, but keeping newlines https://stackoverflow.com/questions/2206378/how-to-split-a-string-but-also-keep-the-delimiters
 
-                        accelVals.setText(strInput);
-
-                        /*
-                         * If checked then receive text, better design would probably be to stop thread if unchecked and free resources, but this is a quick fix
-                         */
-
+                        for(String line : lines){
+                            if(line.startsWith("X:") && line.endsWith("\n")){
+                                xAccel.setText(line.substring(0, line.length() - 1));
+                            } else if(line.startsWith("Y:") && line.endsWith("\n")){
+                                yAccel.setText(line.substring(0, line.length() - 1));
+                            } else if(line.startsWith("X Servo:") && line.endsWith("\n")){
+                                xServo.setText(line.substring(0, line.length() - 1));
+                            } else if(line.startsWith("Y Servo:") && line.endsWith("\n")){
+                                yServo.setText(line.substring(0, line.length() - 1));
+                            } else if(line.startsWith("Speed:") && line.endsWith("\n")){
+                                motors.setText(line.substring(0, line.length() - 1));
+                            }
+                        }
                     }
-                    Thread.sleep(500);
+                    Thread.sleep(250);
                 }
             } catch (IOException e) {
 // TODO Auto-generated catch block

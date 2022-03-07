@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,12 +49,14 @@ public class Calibration extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     Button btnLeft,btnRight, btnUp, btnDown, btnSave;
+    TextView xVal, yVal;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calibration);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         ActivityHelper.initialize(this);
         btnLeft=(Button)findViewById(R.id.leftX);
@@ -59,6 +64,8 @@ public class Calibration extends AppCompatActivity {
         btnUp=(Button)findViewById(R.id.upY);
         btnDown=(Button)findViewById(R.id.downY);
         btnSave=(Button)findViewById(R.id.save);
+        xVal=(TextView)findViewById(R.id.xVal);
+        yVal=(TextView)findViewById(R.id.yVal);
 
 
         Intent intent = getIntent();
@@ -172,9 +179,15 @@ public class Calibration extends AppCompatActivity {
                         }
                         final String strInput = new String(buffer, 0, i);
 
-                        /*
-                         * If checked then receive text, better design would probably be to stop thread if unchecked and free resources, but this is a quick fix
-                         */
+                        String [] lines = strInput.split("(?<=\n)");
+
+                        for(String line : lines){
+                            if(line.startsWith("X Calib:") && line.endsWith("\n")){
+                                xVal.setText(line.split(":")[1]);
+                            } else if(line.startsWith("Y Calib:") && line.endsWith("\n")){
+                                yVal.setText(line.split(":")[1]);
+                            }
+                        }
 
                     }
                     Thread.sleep(500);
@@ -249,6 +262,7 @@ public class Calibration extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         if (mBTSocket == null || !mIsBluetoothConnected) {
             msg("onResume");
             new Calibration.ConnectBT().execute();

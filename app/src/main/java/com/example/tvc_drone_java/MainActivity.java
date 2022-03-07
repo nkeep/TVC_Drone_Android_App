@@ -50,7 +50,7 @@ public class MainActivity extends android.app.Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
         search = (Button) findViewById(R.id.search);
@@ -144,7 +144,8 @@ public class MainActivity extends android.app.Activity {
                 String bufSize = prefs.getString("prefTextBuffer", "Null");
                 mBufferSize = Integer.parseInt(bufSize);
 
-                String orientation = prefs.getString("prefOrientation", "Null");
+//                String orientation = prefs.getString("prefOrientation", "Portrait");
+                String orientation = "Portrait";
                 Log.d(TAG, "Orientation: " + orientation);
                 if (orientation.equals("Landscape")) {
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
