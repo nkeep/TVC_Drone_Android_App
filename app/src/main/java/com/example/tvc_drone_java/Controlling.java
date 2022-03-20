@@ -279,20 +279,7 @@ public class Controlling extends AppCompatActivity {
 //        if(mBTSocket == null){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             msg("onResume");
-            Thread connect = new Thread(new Runnable(){
-                @Override
-                public void run(){
-                    try {
-                        Thread.sleep(4000);
-                        new ConnectBT().execute();
-                    } catch (Exception e){
-                        e.getLocalizedMessage();
-                    }
-
-                }
-            });
-            connect.run();
-            //new ConnectBT().execute();
+            new ConnectBT().execute();
         }
         Log.d(TAG, "Resumed");
         super.onResume();
@@ -325,6 +312,7 @@ public class Controlling extends AppCompatActivity {
         protected Void doInBackground(Void... devices) {
 
             try {
+                Thread.sleep(2000);
                 if (mBTSocket == null || !mIsBluetoothConnected) {
                     mBTSocket = mDevice.createInsecureRfcommSocketToServiceRecord(mDeviceUUID);
                     BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
@@ -335,8 +323,8 @@ public class Controlling extends AppCompatActivity {
                 // e.printStackTrace();
                 mConnectSuccessful = false;
 
-
-
+            } catch(InterruptedException e){
+                e.printStackTrace();
             }
             return null;
         }

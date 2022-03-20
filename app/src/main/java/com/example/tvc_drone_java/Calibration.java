@@ -263,6 +263,7 @@ public class Calibration extends AppCompatActivity {
     @Override
     protected void onResume() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         if (mBTSocket == null || !mIsBluetoothConnected) {
             msg("onResume");
             new Calibration.ConnectBT().execute();

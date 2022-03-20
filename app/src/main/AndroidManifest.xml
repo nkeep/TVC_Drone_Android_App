@@ -29,7 +29,7 @@
         </activity>
         <activity
             android:name=".Calibration"
-            android:screenOrientation="portrait"
+            android:screenOrientation="nosensor"
             android:exported="true">
         </activity>
         <activity
