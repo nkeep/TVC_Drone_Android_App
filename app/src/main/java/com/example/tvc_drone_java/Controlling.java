@@ -116,7 +116,7 @@ public class Controlling extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                long maxVal = Math.round(strength*.14);
+                long maxVal = Math.round(strength*.12);
                 double x = maxVal*Math.cos(Math.toRadians(angle));
                 double y = maxVal*Math.sin(Math.toRadians(angle));
                 double denom;
