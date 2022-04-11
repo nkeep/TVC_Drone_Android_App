@@ -60,9 +60,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="344dp"
-        android:layout_marginBottom="21dp"
+        android:layout_marginStart="275dp"
+        android:layout_marginBottom="22dp"
         android:text="Take Off" />
+
+    <Button
+        android:id="@+id/kill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="418dp"
+        android:layout_marginBottom="22dp"
+        android:text="Kill" />
 
     <TextView
         android:id="@+id/joystickVals"
@@ -100,6 +110,7 @@
         android:layout_marginTop="100dp"
         android:text="Y:"
         android:textSize="20sp" />
+
     <TextView
         android:id="@+id/xServo"
         android:layout_width="129dp"
@@ -109,9 +120,23 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="348dp"
         android:layout_marginLeft="348dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="160dp"
         android:text="X Servo:"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/zAccel"
+        android:layout_width="129dp"
+        android:layout_height="28dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="348dp"
+        android:layout_marginLeft="348dp"
+        android:layout_marginTop="130dp"
+        android:text="Z:"
+        android:textSize="20sp" />
+
     <TextView
         android:id="@+id/yServo"
         android:layout_width="129dp"
@@ -121,9 +146,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="348dp"
         android:layout_marginLeft="348dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="190dp"
         android:text="Y Servo:"
         android:textSize="20sp" />
+
     <TextView
         android:id="@+id/motors"
         android:layout_width="129dp"
@@ -133,7 +159,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="348dp"
         android:layout_marginLeft="348dp"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="220dp"
         android:text="Motors:"
         android:textSize="20sp" />
 

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,15 +41,16 @@ public class Calibration extends AppCompatActivity {
 
     private BluetoothDevice mDevice;
 
-    final static String left="1C";// Calibration values have C at the end
-    final static String right="2C";
-    final static String up="3C";
-    final static String down="4C";
+    final static String left="L";// Calibration values have C at the end
+    final static String right="R";
+    final static String up="U";
+    final static String down="D";
     final static String save="S";
 
 
     private ProgressDialog progressDialog;
     Button btnLeft,btnRight, btnUp, btnDown, btnSave;
+    EditText pInput, iInput, dInput;
     TextView xVal, yVal;
 
 
@@ -66,7 +68,9 @@ public class Calibration extends AppCompatActivity {
         btnSave=(Button)findViewById(R.id.save);
         xVal=(TextView)findViewById(R.id.xVal);
         yVal=(TextView)findViewById(R.id.yVal);
-
+        pInput=(EditText) findViewById(R.id.pInput);
+        iInput=(EditText) findViewById(R.id.iInput);
+        dInput=(EditText)findViewById(R.id.dInput);
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -129,12 +133,25 @@ public class Calibration extends AppCompatActivity {
         {
             @Override
             public void onClick(View arg0) {
+
+                String p = pInput.getText().toString();
+                String i = iInput.getText().toString();
+                String d = dInput.getText().toString();
+
                 try {
+                    mBTSocket.getOutputStream().write("P".getBytes());
+                    mBTSocket.getOutputStream().write(p.getBytes());
+                    mBTSocket.getOutputStream().write(":".getBytes());
+                    mBTSocket.getOutputStream().write(i.getBytes());
+                    mBTSocket.getOutputStream().write(":".getBytes());
+                    mBTSocket.getOutputStream().write(d.getBytes());
+                    mBTSocket.getOutputStream().write(":".getBytes());
                     mBTSocket.getOutputStream().write(save.getBytes());
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+
 
                 new Calibration.DisConnectBT().execute();
                 Intent intent = new Intent(getApplicationContext(), Controlling.class);

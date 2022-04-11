@@ -75,29 +75,17 @@
         app:layout_constraintStart_toEndOf="@+id/servoX"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="356dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="84dp"
-        android:text="Make sure accelerometer is level"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upY" />
-
     <Button
         android:id="@+id/save"
         android:layout_width="167dp"
         android:layout_height="70dp"
-        android:layout_marginTop="114dp"
+        android:layout_marginTop="103dp"
         android:text="Save"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/iVal" />
 
     <TextView
         android:id="@+id/textView3"
@@ -135,5 +123,86 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/upY"
         app:layout_constraintTop_toBottomOf="@+id/xVal" />
+
+    <EditText
+        android:id="@+id/pInput"
+        android:layout_width="63dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="46dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="0"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/iInput"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upY" />
+
+    <EditText
+        android:id="@+id/iInput"
+        android:layout_width="63dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="46dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="0"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/dInput"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/pInput"
+        app:layout_constraintTop_toBottomOf="@+id/upY" />
+
+    <EditText
+        android:id="@+id/dInput"
+        android:layout_width="63dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="46dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="0"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iInput"
+        app:layout_constraintTop_toBottomOf="@+id/upY" />
+
+    <TextView
+        android:id="@+id/pVal"
+        android:layout_width="63dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="P"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/iVal"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pInput" />
+
+    <TextView
+        android:id="@+id/iVal"
+        android:layout_width="63dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="I"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/dVal"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/pVal"
+        app:layout_constraintTop_toBottomOf="@+id/iInput" />
+
+    <TextView
+        android:id="@+id/dVal"
+        android:layout_width="63dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="D"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iVal"
+        app:layout_constraintTop_toBottomOf="@+id/dInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

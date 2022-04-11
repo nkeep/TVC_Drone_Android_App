@@ -37,11 +37,12 @@ public class Controlling extends AppCompatActivity {
     final static String raise="R";
     final static String lower="L";
     final static String takeOff="T";
+    final static String kill="K";
 
 
     private ProgressDialog progressDialog;
-    Button btnRaise,btnLower, btnTakeOff;
-    TextView xAccel, yAccel, xServo, yServo, motors, joystickVals;
+    Button btnRaise,btnLower, btnTakeOff, btnKill;
+    TextView xAccel, yAccel, zAccel, xServo, yServo, motors, joystickVals;
 
 
     @Override
@@ -53,8 +54,10 @@ public class Controlling extends AppCompatActivity {
         btnRaise=(Button)findViewById(R.id.raise);
         btnLower=(Button)findViewById(R.id.lower);
         btnTakeOff=(Button)findViewById(R.id.takeOff);
+        btnKill=(Button)findViewById(R.id.kill);
         xAccel=(TextView)findViewById(R.id.xAccel);
         yAccel=(TextView)findViewById(R.id.yAccel);
+        zAccel=(TextView)findViewById(R.id.zAccel);
         xServo=(TextView)findViewById(R.id.xServo);
         yServo=(TextView)findViewById(R.id.yServo);
         motors=(TextView)findViewById(R.id.motors);
@@ -104,11 +107,22 @@ public class Controlling extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }});
+        btnKill.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                try {
+                    mBTSocket.getOutputStream().write(kill.getBytes());
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }});
         final JoystickView joystick = (JoystickView) findViewById(R.id.joystick);
         joystick.setOnMoveListener(new JoystickView.OnMoveListener() {
             @Override
             public void onMove(int angle, int strength) {
-                if (strength == 0) {
+                if (strength == 0) { //Notify the drone that we let go of the joystick
                     try {
                         mBTSocket.getOutputStream().write(("D").getBytes());
                         return;
@@ -116,14 +130,11 @@ public class Controlling extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                long maxVal = Math.round(strength*.12);
+                //Calculate servo angles
+                long maxVal = Math.round(strength*.17);
                 double x = maxVal*Math.cos(Math.toRadians(angle));
                 double y = maxVal*Math.sin(Math.toRadians(angle));
                 double denom;
-//                Log.d(TAG, String.valueOf(maxVal));
-//                Log.d(TAG, String.valueOf(x));
-//                Log.d(TAG, String.valueOf(y));
-//                Log.d(TAG, String.valueOf(angle));
                 if(Math.abs(x) > Math.abs(y)){
                     denom = x;
                     x = Math.round(x * (maxVal/(denom+.01)));
@@ -134,12 +145,11 @@ public class Controlling extends AppCompatActivity {
                     y = Math.round(y * (maxVal/(denom+.01)));
                     x = Math.round(x * (maxVal/(denom+.01)));
                 }
+                //Inverting values based on where sin and cos are reversed
                 if(angle > 135 && angle <= 315){
                     x *= -1;
                     y *= -1;
                 };
-//                Log.d(TAG, String.valueOf(x));
-//                Log.d(TAG, String.valueOf(y));
                 String xS = String.valueOf((int)x);
                 String yS = String.valueOf((int)y);
                 String output = xS + ":" + yS + ",";
@@ -187,13 +197,16 @@ public class Controlling extends AppCompatActivity {
                         for (i = 0; i < buffer.length && buffer[i] != 0; i++) {
                         }
                         final String strInput = new String(buffer, 0, i);
-                        String [] lines = strInput.split("(?<=\n)"); //splitting by new lines, but keeping newlines https://stackoverflow.com/questions/2206378/how-to-split-a-string-but-also-keep-the-delimiters
+                        //splitting by new lines, but keeping newlines https://stackoverflow.com/questions/2206378/how-to-split-a-string-but-also-keep-the-delimiters
+                        String [] lines = strInput.split("(?<=\n)");
 
                         for(String line : lines){
                             if(line.startsWith("X:") && line.endsWith("\n")){
                                 xAccel.setText(line.substring(0, line.length() - 1));
                             } else if(line.startsWith("Y:") && line.endsWith("\n")){
                                 yAccel.setText(line.substring(0, line.length() - 1));
+                            } else if(line.startsWith("Z:") && line.endsWith("\n")){
+                                zAccel.setText(line.substring(0, line.length() - 1));
                             } else if(line.startsWith("X Servo:") && line.endsWith("\n")){
                                 xServo.setText(line.substring(0, line.length() - 1));
                             } else if(line.startsWith("Y Servo:") && line.endsWith("\n")){
@@ -203,7 +216,7 @@ public class Controlling extends AppCompatActivity {
                             }
                         }
                     }
-                    Thread.sleep(250);
+                    Thread.sleep(200);
                 }
             } catch (IOException e) {
 // TODO Auto-generated catch block
