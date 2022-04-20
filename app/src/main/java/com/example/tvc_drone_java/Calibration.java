@@ -29,9 +29,11 @@ public class Calibration extends AppCompatActivity {
     public static final String DEVICE_EXTRA = "com.example.tvc_drone_java.SOCKET";
     public static final String DEVICE_UUID = "com.example.tvc_drone_java.uuid";
     public static final String BUFFER_SIZE = "com.example.tvc_drone_java.buffersize";
+    public static final String SERVO_RANGE = "com.example.tvc_drone_java.servorange";
 
     private static final String TAG = "BlueTest5-Controlling";
     private int mMaxChars = 50000;//Default//change this to string..........
+    private String servoRange;
     private UUID mDeviceUUID;
     private BluetoothSocket mBTSocket;
     private ReadInput mReadThread = null;
@@ -50,7 +52,7 @@ public class Calibration extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     Button btnLeft,btnRight, btnUp, btnDown, btnSave;
-    EditText pInput, iInput, dInput;
+    EditText pInput, iInput, dInput, servoRangeInput;
     TextView xVal, yVal;
 
 
@@ -71,6 +73,7 @@ public class Calibration extends AppCompatActivity {
         pInput=(EditText) findViewById(R.id.pInput);
         iInput=(EditText) findViewById(R.id.iInput);
         dInput=(EditText)findViewById(R.id.dInput);
+        servoRangeInput=(EditText)findViewById(R.id.servoRangeVal);
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -137,6 +140,7 @@ public class Calibration extends AppCompatActivity {
                 String p = pInput.getText().toString();
                 String i = iInput.getText().toString();
                 String d = dInput.getText().toString();
+                servoRange = servoRangeInput.getText().toString();
 
                 try {
                     mBTSocket.getOutputStream().write("P".getBytes());
@@ -158,6 +162,7 @@ public class Calibration extends AppCompatActivity {
                 intent.putExtra(DEVICE_EXTRA, mDevice);
                 intent.putExtra(DEVICE_UUID, mDeviceUUID.toString());
                 intent.putExtra(BUFFER_SIZE, mMaxChars);
+                intent.putExtra(SERVO_RANGE, servoRange);
                 startActivity(intent);
             }
         });

@@ -26,6 +26,8 @@ public class Controlling extends AppCompatActivity {
     private static final String TAG = "BlueTest5-Controlling";
     private int mMaxChars = 50000;//Default//change this to string..........
     private UUID mDeviceUUID;
+    private String servoRangeString;
+    private int servoRange;
     private BluetoothSocket mBTSocket;
     private ReadInput mReadThread = null;
 
@@ -69,6 +71,8 @@ public class Controlling extends AppCompatActivity {
         mDevice = b.getParcelable(MainActivity.DEVICE_EXTRA);
         mDeviceUUID = UUID.fromString(b.getString(MainActivity.DEVICE_UUID));
         mMaxChars = b.getInt(MainActivity.BUFFER_SIZE);
+        servoRangeString = b.getString(Calibration.SERVO_RANGE);
+        servoRange = Integer.parseInt(servoRangeString);
 
         Log.d(TAG, "Ready");
 
@@ -131,7 +135,7 @@ public class Controlling extends AppCompatActivity {
                     }
                 }
                 //Calculate servo angles
-                long maxVal = Math.round(strength*.17);
+                long maxVal = Math.round(strength*servoRange*.01);
                 double x = maxVal*Math.cos(Math.toRadians(angle));
                 double y = maxVal*Math.sin(Math.toRadians(angle));
                 double denom;

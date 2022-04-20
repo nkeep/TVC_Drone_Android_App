@@ -43,6 +43,7 @@ public class MainActivity extends android.app.Activity {
     private static final String DEVICE_LIST = "com.example.tvc_drone_java.devicelist";
     private static final String DEVICE_LIST_SELECTED = "com.example.tvc_drone_java.devicelistselected";
     public static final String BUFFER_SIZE = "com.example.tvc_drone_java.buffersize";
+    public static final String SERVO_RANGE = "com.example.tvc_drone_java.servorange";
     private static final String TAG = "BlueTest5-MainActivity";
 
 

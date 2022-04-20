@@ -29,6 +29,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/servoX" />
 
+    <TextView
+        android:id="@+id/servoRange"
+        android:layout_width="138dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="52dp"
+        android:gravity="center"
+        android:text="Servo Range"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pVal" />
+
     <Button
         android:id="@+id/downY"
         android:layout_width="80dp"
@@ -79,11 +92,10 @@
         android:id="@+id/save"
         android:layout_width="167dp"
         android:layout_height="70dp"
-        android:layout_marginTop="103dp"
+        android:layout_marginTop="148dp"
         android:text="Save"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iVal" />
 
@@ -151,6 +163,21 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/pInput"
         app:layout_constraintTop_toBottomOf="@+id/upY" />
+
+    <EditText
+        android:id="@+id/servoRangeVal"
+        android:layout_width="66dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="51dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="0"
+        android:inputType="number"
+        android:text="17"
+        app:layout_constraintStart_toEndOf="@+id/servoRange"
+        app:layout_constraintTop_toBottomOf="@+id/iVal" />
 
     <EditText
         android:id="@+id/dInput"
